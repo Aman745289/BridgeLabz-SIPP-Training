@@ -2,8 +2,6 @@ package bridgelabz;
 
 import java.util.*;
 
-//Write a program that takes the base and height in cm to find the area of a triangle in square inches and square centimeters 
-
 public class Area_Of_Triangle {
 
 	public static void main(String[] args) {

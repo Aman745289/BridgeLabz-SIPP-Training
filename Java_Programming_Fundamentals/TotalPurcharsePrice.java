@@ -1,14 +1,12 @@
 package bridgelabz;
 import java.util.*;
 
-//Write a program to input the unit price of an item and the quantity to be bought. Then, calculate the total price.
-
 public class TotalPurcharsePrice {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Scanner sc  = new Scanner(System.in);
-		System.out.println("wrfite Unit Priced and Quantity brought: ");
+		System.out.println("Unit Priced and Quantity brought: ");
 		float price = sc.nextInt();
 		float quantity = sc.nextInt();
 		

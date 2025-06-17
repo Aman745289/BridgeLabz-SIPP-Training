@@ -2,8 +2,6 @@ package bridgelabz;
 
 import java.util.*;
 
-//Write a program to find the side of the square whose parameter you read from the user 
-
 public class perimeter_square {
 
 	public static void main(String[] args) {
