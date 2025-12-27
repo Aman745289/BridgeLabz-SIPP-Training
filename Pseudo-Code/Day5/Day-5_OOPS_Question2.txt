@@ -1,0 +1,47 @@
+INTERFACE TaxCalculator
+    METHOD calculateTax(itemPrice) RETURNS double
+
+CLASS FoodTax IMPLEMENTS TaxCalculator
+    METHOD calculateTax(price) RETURN price * 0.05
+
+CLASS BeverageTax IMPLEMENTS TaxCalculator
+    METHOD calculateTax(price) RETURN price * 0.12
+
+CLASS ImportedTax IMPLEMENTS TaxCalculator
+    METHOD calculateTax(price) RETURN price * 0.05 + customsDuty
+
+INTERFACE DiscountPolicy
+    METHOD applyDiscount(amount) RETURNS double
+
+CLASS NoDiscount IMPLEMENTS DiscountPolicy
+    METHOD applyDiscount(amount) RETURN amount
+
+CLASS FlatDiscount IMPLEMENTS DiscountPolicy
+    METHOD applyDiscount(amount) RETURN amount - 100
+
+CLASS PercentageDiscount IMPLEMENTS DiscountPolicy
+    METHOD applyDiscount(amount) RETURN amount * 0.90
+
+CLASS BillItem
+    VARIABLE name
+    VARIABLE price
+    VARIABLE taxCalculator
+
+    METHOD getFinalPrice()
+        RETURN price + taxCalculator.calculateTax(price)
+
+CLASS Bill
+    VARIABLE items : List<BillItem>
+    VARIABLE discountPolicy : DiscountPolicy
+
+    METHOD calculateTotal()
+        total = 0
+        FOR each item in items
+            total = total + item.getFinalPrice()
+        RETURN discountPolicy.applyDiscount(total)
+item1 = BillItem("Paneer Tikka", 200, new FoodTax)
+item2 = BillItem("Coke", 100, new BeverageTax)
+item3 = BillItem("Imported Cheese", 500, new ImportedTax)
+
+bill = new Bill([item1, item2, item3], new PercentageDiscount)
+PRINT bill.calculateTotal()
